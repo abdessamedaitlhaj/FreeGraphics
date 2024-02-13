@@ -38,7 +38,7 @@ const Product_Page = ({ graphicList, loading }) => {
             alt="img1"
             className="object-cover rounded-lg"
           />
-          <div className="flex flex-col space-y-4 md:flex-row w-3/4 p-4 justify-between items-center">
+          <div className="flex flex-col space-y-4 md:flex-row w-full items-center p-2 justify-between">
             <p className="text-center">{graphic?.title}</p>
             <div>
               <i className="ri-heart-3-line text-2xl p-3 hover:bg-tertiary hover:text-white hover:cursor-pointer rounded-full"></i>

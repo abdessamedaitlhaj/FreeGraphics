@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from graphics.models import Category, FileType, Graphic
-from graphics.api.serializsers import CategorySerializer, FileTypeSerializer, GraphicSerializer, UserSerializer
+from graphics.api.serializers import CategorySerializer, FileTypeSerializer, GraphicSerializer, UserSerializer
 from django.contrib.auth.models import User
 
 
@@ -155,3 +155,5 @@ def user(request, pk):
         user = User.objects.get(pk=pk)
         user.delete()
         return Response(status=204)
+
+

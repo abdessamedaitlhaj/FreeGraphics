@@ -28,7 +28,7 @@ class Graphic(models.Model):
     license = models.ForeignKey(License, on_delete=models.CASCADE)
     file_types = models.ManyToManyField(FileType, related_name="graphics")
     is_free = models.BooleanField(default=True)
-    file_url = models.URLField()
+    file_url = models.FileField(upload_to='graphics/')
     image = models.URLField()
 
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -17,22 +17,23 @@ const Signup = () => {
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
 
-    const [formData, setFormData] = useState({
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+    // const [formData, setFormData] = useState({
+    //   username: "",
+    //   email: "",
+    //   password: "",
+    //   confirmPassword: "",
+    // });
   
+    const formData = {
+      username: usernameRef.current?.value ?? "",
+      email: emailRef.current?.value ?? "",
+      password: passwordRef.current?.value ?? "",
+      confirm_password: confirmPasswordRef.current?.value ?? "",
+    };
     const handleSubmit = async (e) => {
       e.preventDefault();
   
-      // const formData = {
-      //   username: usernameRef.current?.value ?? "",
-      //   email: emailRef.current?.value ?? "",
-      //   password: passwordRef.current?.value ?? "",
-      //   confirm_password: confirmPasswordRef.current?.value ?? "",
-      // };
+
       
       // try {
       //   const response = await axios.post('http://localhost:8000/api/apirest/users/', formData);
@@ -41,6 +42,8 @@ const Signup = () => {
       //   console.error(error);  // Handle error
       // };
     }
+    useEffect(() => {
+    }, []);
 
   return (
     <div className="flex flex-col md:flex-row items-center">
@@ -70,8 +73,9 @@ const Signup = () => {
             placeholder="username"
             ref={usernameRef}
             className="border-2 border-secondary p-2 rounded-lg"
+            required
           />
-          <span>{formData.username}</span>
+          <span>{formData.username.length > 3 && "error message"}</span>
           <label htmlFor="email" className="text-sm">
             Email :
           </label>
@@ -80,6 +84,7 @@ const Signup = () => {
             name="email"
             placeholder="email"
             ref={emailRef}
+            required
             className="border-2 border-secondary p-2 rounded-lg"
           />
           <label htmlFor="email" className="text-sm">
@@ -90,6 +95,7 @@ const Signup = () => {
             name="password"
             placeholder="password"
             ref={passwordRef}
+            required
             className="border-2 border-secondary p-2 rounded-lg"
           />
           <label htmlFor="email" className="text-sm">
@@ -100,6 +106,7 @@ const Signup = () => {
             name="confirm_password"
             placeholder="confirm password"
             ref={confirmPasswordRef}
+            required
             className="border-2 border-secondary p-2 rounded-lg"
           />
           <button className="bg-tertiary text-white rounded-lg p-2">

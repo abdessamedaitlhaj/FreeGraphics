@@ -22,6 +22,7 @@ const Login = () => {
             type="text"
             name="email"
             placeholder="email or username"
+            required
             className="border-2 border-secondary p-2 rounded-lg"
           />
           <label htmlFor="email">Password</label>
@@ -29,6 +30,7 @@ const Login = () => {
             type="text"
             name="email"
             placeholder="password"
+            required
             className="border-2 border-secondary p-2 rounded-lg"
           />
           <button className="bg-tertiary text-white rounded-lg p-2">
