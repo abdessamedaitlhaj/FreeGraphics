@@ -17,6 +17,7 @@ import axios from "axios";
 function App() {
   const mobile = useState(false);
   const [graphicList, setGraphicList] = useState([]);
+  const [graphics, setGraphics] = useState([]);
   const [loading, setLoading] = useState(false);
   const enable = useState(false);
 
@@ -31,6 +32,24 @@ function App() {
       .catch(error => {
         console.error('Error fetching data:', error);
       });
+
+      axios.get('http://localhost:8000/api/apirest/graphics/')
+      .then(res => {
+        setGraphics(res.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+    
+      axios.get('http://localhost:8000/api/user/')
+      .then(res => {
+        console.log("hello");
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+
+
       
   }, []);
 
@@ -59,12 +78,11 @@ function App() {
             <Route path="/signup" element={<Signup></Signup>}></Route>
             <Route path="/downloads/{id}" element={<My_Downloads></My_Downloads>}></Route>
             <Route path="/favorites/{id}" element={<My_Favorites></My_Favorites>}></Route>
-            <Route path="/" element={ <Home mobileMenu={mobile} enableAssests={enable}></Home>}></Route>
+            <Route path="/" element={ <Home mobileMenu={mobile} enableAssests={enable} graphics={graphics}></Home>}></Route>
             <Route path="/:vectors" element={<Results graphicList={graphicList} enableAssests={enable}></Results>}></Route>
             <Route path="/:icons" element={<Results graphicList={graphicList} enableAssests={enable}></Results>}></Route>
             <Route path="/:photos" element={<Results graphicList={graphicList} enableAssests={enable}></Results>}></Route>
             <Route path="/graphic/:id" element={<Product_Page graphicList={graphicList} loading={loading}></Product_Page>}></Route>
-            
           </Routes>
           <Footer></Footer>
       </Router>

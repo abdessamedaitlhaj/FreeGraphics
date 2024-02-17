@@ -7,10 +7,25 @@ import image6 from "../assets/image1.webp";
 import thousands from "../assets/svg_thousands.svg";
 import quality from "../assets/svg_quality.svg";
 import search from "../assets/svg_search.svg";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
+
+const Home = ({ mobileMenu, enableAssests, graphics}) => {
+
+  // <Navbar mobileMenu={mobileMenu}></Navbar>
+  const [trendingGraphics, setTrendingGraphics] = useState([]);
+
+  useEffect(() => {
 
 
-const Home = ({ mobileMenu, enableAssests}) => {
+  
+    const slicedGraphics = graphics.slice(0, 6);
+    setTrendingGraphics(slicedGraphics)
+
+  }, [])
+
+
   return (
     <>
       {/* mobile menu */}
@@ -22,40 +37,40 @@ const Home = ({ mobileMenu, enableAssests}) => {
         }
       >
         <div>
-          <a href="#">
+          <Link to="/vectors">
             <span className="text-lg hover:border-b-2 hover:border-secondary">
               Vectors
             </span>
-          </a>
+          </Link>
         </div>
         <div>
-          <a href="#">
+          <Link to="/icons">
             <span className="text-lg hover:border-b-2 hover:border-secondary">
               Icons
             </span>
-          </a>
+          </Link>
         </div>
         <div>
-          <a href="#">
+          <Link to="/photos">
             <span className="text-lg hover:border-b-2 hover:border-secondary">
               Photos
             </span>
-          </a>
+          </Link>
         </div>
         <div className="flex space-x-4 md:space-x-8">
-          <a
-            href="sign_up.html"
+          <Link
+            to="/signup"
             className="text-md p-1 bg-tertiary md:px-3 md:py-2 rounded-lg text-white"
           >
             Sign up
-          </a>
+          </Link>
 
-          <a
-            href="login.html"
+          <Link
+            to="/login"
             className="text-md p-1 border-2 border-tertiary md:px-3 md:py-2 rounded-lg"
           >
             Log in
-          </a>
+          </Link>
         </div>
       </section>
       {/* end mobile menu */}
@@ -109,17 +124,16 @@ const Home = ({ mobileMenu, enableAssests}) => {
         </div>
       </section>
 
-      <section className="flex flex-col space-y-8 p-4 rounded-2xl text-center">
-        <p className="font-light text-lg md:text-4xl">
-          Download Free Vectors, Photos, Icons, Unveal Your Creativity Today!
+      <section className="flex flex-col space-y-8 p-4 rounded-2xl items-center">
+        <p className="font-light text-3xl md:text-4xl">
+          Explore trending graphics!
         </p>
-        <div className="flex flex-col space-y-8 md:grid grid-rows-2 grid-cols-3 place-items-start text-center">
-          <img src={image1} className="object-cover rounded-lg w-3/4" alt="" />
-          <img src={image2} className="object-cover rounded-lg w-3/4" alt="" />
-          <img src={image3} className="object-cover rounded-lg w-3/4" alt="" />
-          <img src={image4} className="object-cover rounded-lg w-3/4" alt="" />
-          <img src={image5} className="object-cover rounded-lg w-3/4" alt="" />
-          <img src={image6} className="object-cover rounded-lg w-3/4" alt="" />
+        <div className="flex flex-col items-center space-y-8 md:grid grid-cols-3">
+          {trendingGraphics.map((item) => {
+            return <Link to={"/graphic/" + item.id}>
+              <img key={item.id} src={item.image} className="object-cover rounded-lg w-3/4 inline" alt={item.title} />
+            </Link>
+          })}
         </div>
       </section>
       <section className="bg-primary p-4 flex flex-col items-center justify-center space-y-4 mt-20 rounded-2xl">

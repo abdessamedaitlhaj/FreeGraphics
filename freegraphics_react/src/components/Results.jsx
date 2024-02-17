@@ -10,7 +10,6 @@ const Results = ( { graphicList, enableAssests }) => {
     const [loading, setLoading] = useState(false);
     const param = useParams();
     
-    console.log(enableAssests);
     
     useEffect(() => {
       if (graphicList.length > 0) {
@@ -72,11 +71,11 @@ const Results = ( { graphicList, enableAssests }) => {
           {/* end list of assests */}
         </div>
       </section>
-      <section class="p-4 flex flex-col md:grid grid-cols-3 gap-x-4">
+      <section className="p-4 flex flex-col md:grid grid-cols-3 gap-x-4">
         {graphics.map( (item) => {
           return (
             <div
-            class="w-full h-full mt-10 hover:brightness-75 hover:transition-transform duration-300 relative" key={item.id}>
+            className="w-full h-full mt-10 hover:brightness-75 hover:transition-transform duration-300 relative" key={item.id}>
               <Link to={"/graphic/" + item.id}>
                 <img
                   src={item.image}

@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 const Footer = () => {
   return (
     <div className="container mx-auto ">
-      <footer className="bg-primary p-8 rounded-2xl flex flex-col space-y-12 md:flex-row justify-between items-center mx-auto">
+      <footer className="bg-primary p-8 flex flex-col space-y-12 md:flex-row justify-between items-center mx-auto">
         <div className="flex flex-col items-center space-y-6">
           <span className="hover:text-secondary">
             <Link to="/">Home</Link>

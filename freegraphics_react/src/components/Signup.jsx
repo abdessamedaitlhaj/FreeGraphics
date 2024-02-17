@@ -2,54 +2,47 @@ import { useRef, useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import image1 from "../assets/image1.webp"
 
 
 
 const Signup = () => {
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const redirectToLogin = () => navigate("/login")
 
-    const usernameRef = useRef(null);
-    const emailRef = useRef(null);
-    const passwordRef = useRef(null);
-    const confirmPasswordRef = useRef(null);
+  const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmPassowrd, setConfirmPassword] = useState();
 
-    // const [formData, setFormData] = useState({
-    //   username: "",
-    //   email: "",
-    //   password: "",
-    //   confirmPassword: "",
-    // });
-  
-    const formData = {
-      username: usernameRef.current?.value ?? "",
-      email: emailRef.current?.value ?? "",
-      password: passwordRef.current?.value ?? "",
-      confirm_password: confirmPasswordRef.current?.value ?? "",
-    };
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
 
-      
-      // try {
-      //   const response = await axios.post('http://localhost:8000/api/apirest/users/', formData);
+  const handleSubmit = async (e) => {
 
-      // } catch (error) {
-      //   console.error(error);  // Handle error
-      // };
-    }
-    useEffect(() => {
-    }, []);
+    e.preventDefault()
+    
+    const response = await fetch('http://localhost:8000/api/signup/', {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        email,
+        password
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return navigate("/login");
+  }
+
+  useEffect(() => {
+  });
+
 
   return (
     <div className="flex flex-col md:flex-row items-center">
       <div>
         <img
-          src={image1}
+          src="https://img.freepik.com/free-photo/island-middle-lake_23-2148215275.jpg?t=st=1707888914~exp=1707889514~hmac=c3f05af9a471cabe03cc42a3ce5394a8c17803237190196866a3269aca15f30a"
           alt="login"
           className="object-cover h-[100vh] w-full"
         />
@@ -71,11 +64,10 @@ const Signup = () => {
             type="text"
             name="username"
             placeholder="username"
-            ref={usernameRef}
             className="border-2 border-secondary p-2 rounded-lg"
             required
+            onChange = {(e) => setUserName(e.target.value)}
           />
-          <span>{formData.username.length > 3 && "error message"}</span>
           <label htmlFor="email" className="text-sm">
             Email :
           </label>
@@ -83,9 +75,9 @@ const Signup = () => {
             type="text"
             name="email"
             placeholder="email"
-            ref={emailRef}
             required
             className="border-2 border-secondary p-2 rounded-lg"
+            onChange = {(e) => setEmail(e.target.value)}
           />
           <label htmlFor="email" className="text-sm">
             Password :
@@ -94,9 +86,9 @@ const Signup = () => {
             type="text"
             name="password"
             placeholder="password"
-            ref={passwordRef}
             required
             className="border-2 border-secondary p-2 rounded-lg"
+            onChange = {(e) => setPassword(e.target.value)}
           />
           <label htmlFor="email" className="text-sm">
             Confirm Password :
@@ -105,9 +97,9 @@ const Signup = () => {
             type="text"
             name="confirm_password"
             placeholder="confirm password"
-            ref={confirmPasswordRef}
             required
             className="border-2 border-secondary p-2 rounded-lg"
+            onChange = {(e) => setConfirmPassword(e.target.value)}
           />
           <button className="bg-tertiary text-white rounded-lg p-2">
             Sign up
